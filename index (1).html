@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>COGS Quest — Glacier (Daily Free-Entry)</title>
+<style>
+  /* Glacier theme styles */
+  :root {
+    --bg1:#e6f2f8; --bg2:#d8eef7; --card:#ffffff; --muted:#6b7c93; --text:#0b3356;
+    --sub:#496b89; --ok:#15803d; --warn:#b45309; --alert:#b91c1c; --accent:#4ba3d9; --line:#cfe5f2;
+  }
+  body {
+    margin:0; background:linear-gradient(180deg,var(--bg1),var(--bg2));
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+    color:var(--text);
+  }
+  .wrap {
+    max-width:1200px; margin:24px auto; padding:16px;
+  }
+  h1 { margin:0 0 8px; }
+  table { border-collapse: collapse; width:100%; background:var(--card); box-shadow:0 2px 6px rgba(0,0,0,0.05); }
+  th, td { padding:8px; border:1px solid var(--line); text-align:center; }
+  th { background:var(--accent); color:white; }
+  input[type=number] {
+    width:100%; padding:6px; border:1px solid var(--line);
+    border-radius:4px; font-size:14px;
+  }
+</style>
+<script>
+  function updateTotals() {
+    let rows = document.querySelectorAll("#salesTable tbody tr");
+    rows.forEach(row => {
+      let inputs = row.querySelectorAll("input[type=number]");
+      let total = 0;
+      inputs.forEach(input => {
+        total += parseFloat(input.value) || 0;
+      });
+      row.querySelector(".totalCell").innerText = total.toFixed(2);
+    });
+  }
+</script>
+</head>
+<body>
+<div class="wrap">
+  <h1>Sales (Daily) — Free Entry Mode</h1>
+  <table id="salesTable">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Day 1</th>
+        <th>Day 2</th>
+        <th>Day 3</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Liquor</td>
+        <td><input type="number" step="0.01" oninput="updateTotals()"></td>
+        <td><input type="number" step="0.01" oninput="updateTotals()"></td>
+        <td><input type="number" step="0.01" oninput="updateTotals()"></td>
+        <td class="totalCell">0.00</td>
+      </tr>
+      <tr>
+        <td>Beer</td>
+        <td><input type="number" step="0.01" oninput="updateTotals()"></td>
+        <td><input type="number" step="0.01" oninput="updateTotals()"></td>
+        <td><input type="number" step="0.01" oninput="updateTotals()"></td>
+        <td class="totalCell">0.00</td>
+      </tr>
+      <tr>
+        <td>Wine</td>
+        <td><input type="number" step="0.01" oninput="updateTotals()"></td>
+        <td><input type="number" step="0.01" oninput="updateTotals()"></td>
+        <td><input type="number" step="0.01" oninput="updateTotals()"></td>
+        <td class="totalCell">0.00</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
